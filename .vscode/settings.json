@@ -1,0 +1,4 @@
+{
+  "kotlin.lint.enabled": false,
+  "kotlin.languageServer.enabled": false
+}
