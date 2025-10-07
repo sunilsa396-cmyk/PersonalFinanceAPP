@@ -12,16 +12,15 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
 |--------------|--------------|--------------|
-<<<<<<< HEAD
-| ![Screenshot 1](assets/screenshot1.jpeg) <br> *Access device battery optimization settings. Send events to the React Native layer based on battery state.* | ![Screenshot 2](assets/screenshot2.jpeg) <br> *Title 2* | ![Screenshot 3](assets/screenshot3.jpeg) <br> *Title 3* |
-=======
 | ![Screenshot 1](assets/screenshot1.jpeg) <br> *1. Access device battery optimization settings. 2.based on battery state.* | ![Screenshot 2](assets/screenshot2.jpeg) <br> *1. Visualize data through react-native-chart-kit (bar chart, pie chart). * | ![Screenshot 3](assets/screenshot3.jpeg) <br> *1.List transactions with infinite scroll. 2. Sync data with a backend API [real].* |
->>>>>>> f9c80be (Add all changes including README update)
 
 | Screenshot 4 | Screenshot 5 | Screenshot 6 |
 |--------------|--------------|--------------|
 | ![Screenshot 4](assets/screenshot4.jpeg) <br> *Add new transactions using forms and validation.* | ![Screenshot 5](assets/screenshot5.jpeg) <br> *Categorize transactions (e.g., Food, Transport, Entertainment).* | ![Screenshot 6](assets/screenshot6.jpeg) <br> *1. Add, edit, and delete income and expense entries.* |
 
+| Screenshot 7 | Screenshot 8 | Screenshot 9 |
+|--------------|--------------|--------------|
+| ![Screenshot 7](assets/screenshot7.jpeg) <br> *Add, edit, and delete income and expense entries.* | ![Screenshot 8](assets/screenshot5.jpeg) <br> *Categorize transactions (e.g., Food, Transport, Entertainment).* | ![Screenshot 9](assets/screenshot6.jpeg) <br> *1. Add, edit, and delete income and expense entries.* |
 
 ---
 
