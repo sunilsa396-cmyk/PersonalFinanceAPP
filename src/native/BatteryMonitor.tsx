@@ -15,7 +15,6 @@ export const BatteryMonitor = () => {
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
 
   useEffect(() => {
-    // Fetch initial battery level
     const fetchBattery = async () => {
       try {
         const level = await Battery.getBatteryLevelAsync();
@@ -26,7 +25,6 @@ export const BatteryMonitor = () => {
     };
     fetchBattery();
 
-    // Subscribe to battery changes
     const subscription = Battery.addBatteryLevelListener(({ batteryLevel }) => {
       const levelPercent = Math.round(batteryLevel * 100);
       setBatteryLevel(levelPercent);
@@ -49,7 +47,6 @@ export const BatteryMonitor = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Titles */}
       <Text style={styles.mainTitle}>
         Send events to the React Native layer based on battery state.
       </Text>

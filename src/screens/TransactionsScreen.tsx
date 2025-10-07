@@ -39,19 +39,16 @@ export const TransactionsScreen: React.FC = () => {
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null);
   const [formVisible, setFormVisible] = useState(false);
 
-  // Fetch all transactions on mount
   useEffect(() => {
     fetchAll();
   }, []);
 
-  // Update visibleData, totals, and grand total when data or filters change
   useEffect(() => {
     const filtered =
       selectedCategory === "All"
         ? transactions
         : transactions.filter((t) => t.transaction_category === selectedCategory);
 
-    // ✅ Sort by date (Ascending or Descending)
     const sortedFiltered = [...filtered].sort((a, b) => {
       const aDate = new Date(a.date).getTime();
       const bDate = new Date(b.date).getTime();
@@ -103,7 +100,6 @@ export const TransactionsScreen: React.FC = () => {
     addTransaction(tx);
   };
 
-  // ✅ Toggle sort order
   const toggleSortOrder = () => {
     setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
   };
@@ -121,7 +117,6 @@ export const TransactionsScreen: React.FC = () => {
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#f9f9f9" />
 
-      {/* Header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={styles.toggleButton}
@@ -131,7 +126,6 @@ export const TransactionsScreen: React.FC = () => {
         </TouchableOpacity>
         <Text style={styles.fixedTitle}>My Personal Finances</Text>
 
-        {/* ✅ Sort Button */}
         <TouchableOpacity style={styles.sortButton} onPress={toggleSortOrder}>
           <Text style={styles.sortText}>
             {sortOrder === "desc" ? "↓ Date" : "↑ Date"}
@@ -139,7 +133,6 @@ export const TransactionsScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      {/* FlatList */}
       <FlatList
         data={visibleData}
         keyExtractor={(item) => item.id.toString()}
@@ -172,7 +165,6 @@ export const TransactionsScreen: React.FC = () => {
       selectedCategory={selectedCategory}
     />
 
-    {/* 🔹 Title Row with Sort Button */}
     <View style={styles.titleRow}>
       <Text style={styles.listTitle}>Transactions List</Text>
       <TouchableOpacity onPress={toggleSortOrder}>
@@ -189,7 +181,6 @@ export const TransactionsScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       />
 
-      {/* Edit Transaction Modal */}
       <TransactionForm
         visible={formVisible}
         initial={editTransaction}
