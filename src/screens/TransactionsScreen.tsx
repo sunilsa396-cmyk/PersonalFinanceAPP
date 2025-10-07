@@ -36,7 +36,6 @@ export const TransactionsScreen: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Edit modal state
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null);
   const [formVisible, setFormVisible] = useState(false);
 
@@ -52,6 +51,7 @@ export const TransactionsScreen: React.FC = () => {
         ? transactions
         : transactions.filter((t) => t.transaction_category === selectedCategory);
 
+    // ✅ Sort by date (Ascending or Descending)
     const sortedFiltered = [...filtered].sort((a, b) => {
       const aDate = new Date(a.date).getTime();
       const bDate = new Date(b.date).getTime();
@@ -84,7 +84,6 @@ export const TransactionsScreen: React.FC = () => {
     }
   };
 
-  // Edit modal handler
   const handleEdit = useCallback((tx: Transaction) => {
     setEditTransaction(tx);
     setFormVisible(true);
@@ -101,7 +100,12 @@ export const TransactionsScreen: React.FC = () => {
   };
 
   const handleAddTransactionFromAction = (tx: Transaction) => {
-    addTransaction(tx); // Add transaction from TransactionActions
+    addTransaction(tx);
+  };
+
+  // ✅ Toggle sort order
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
   };
 
   if (loading) {
@@ -121,11 +125,18 @@ export const TransactionsScreen: React.FC = () => {
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={styles.toggleButton}
-          onPress={() => console.log("Toggle pressed")}
+          onPress={() => console.log("Menu pressed")}
         >
           <Text style={styles.toggleButtonText}>☰</Text>
         </TouchableOpacity>
         <Text style={styles.fixedTitle}>My Personal Finances</Text>
+
+        {/* ✅ Sort Button */}
+        <TouchableOpacity style={styles.sortButton} onPress={toggleSortOrder}>
+          <Text style={styles.sortText}>
+            {sortOrder === "desc" ? "↓ Date" : "↑ Date"}
+          </Text>
+        </TouchableOpacity>
       </View>
 
       {/* FlatList */}
@@ -139,27 +150,40 @@ export const TransactionsScreen: React.FC = () => {
             onDelete={removeTransaction}
           />
         )}
-        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 20, paddingTop: 70 }}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>No transactions found</Text>
-        }
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: 20,
+          paddingTop: 70,
+        }}
+        ListEmptyComponent={<Text style={styles.emptyText}>No transactions found</Text>}
         ListHeaderComponent={
-          <>
-            <BatteryMonitor />
-            <TransactionChart transactions={transactions} />
-            <TransactionActions
-              selectedCategory={selectedCategory}
-              categories={categories}
-              onAddTransaction={handleAddTransactionFromAction}
-              onSelectCategory={setSelectedCategory}
-            />
-            <CategoryTotals
-              categoryTotals={categoryTotals}
-              grandTotal={grandTotal}
-              selectedCategory={selectedCategory}
-            />
-          </>
-        }
+  <>
+    <BatteryMonitor />
+    <TransactionChart transactions={transactions} />
+    <TransactionActions
+      selectedCategory={selectedCategory}
+      categories={categories}
+      onAddTransaction={handleAddTransactionFromAction}
+      onSelectCategory={setSelectedCategory}
+    />
+    <CategoryTotals
+      categoryTotals={categoryTotals}
+      grandTotal={grandTotal}
+      selectedCategory={selectedCategory}
+    />
+
+    {/* 🔹 Title Row with Sort Button */}
+    <View style={styles.titleRow}>
+      <Text style={styles.listTitle}>Transactions List</Text>
+      <TouchableOpacity onPress={toggleSortOrder}>
+        <Text style={styles.sortButtonText}>
+          {sortOrder === "desc" ? "↓ Date" : "↑ Date"}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </>
+}
+
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         showsVerticalScrollIndicator={false}
@@ -198,7 +222,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   fixedTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: "brandonmedium",
     color: "#333",
     textAlign: "center",
@@ -211,10 +235,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  toggleButtonText: {
-    fontSize: 22,
-    color: "#007AFF",
+  toggleButtonText: { fontSize: 22, color: "#007AFF" },
+
+  sortButton: {
+    position: "absolute",
+    right: 16,
+    padding: 6,
   },
+  sortText: {
+    fontSize: 14,
+    color: "#007AFF",
+    fontFamily: "brandonmedium",
+  },
+
   emptyText: {
     textAlign: "center",
     marginTop: 20,
@@ -222,6 +255,26 @@ const styles = StyleSheet.create({
     color: "#555",
     fontFamily: "brandonmedium",
   },
+  listTitle: {
+    fontSize: 18,
+    fontFamily: "brandonmedium",
+    color: "#333",
+    marginTop: 20,
+  },
+  titleRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginHorizontal: 10,
+},
+
+sortButtonText: {
+  fontSize: 14,
+  color: "#007AFF",
+  top: 10,
+  fontFamily: "brandonmedium",
+},
+
 });
 
 export default TransactionsScreen;

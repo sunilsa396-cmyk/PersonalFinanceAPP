@@ -19,7 +19,6 @@ const TransactionItem: React.FC<Props> = ({ item, onEdit, onDelete }) => {
         item.transaction_type === "income" ? styles.income : styles.expense,
       ]}
     >
-      {/* Left Side - Details */}
       <View style={{ flex: 1 }}>
         <Text style={styles.category}>{item.transaction_category}</Text>
         <Text style={styles.amount}>
@@ -29,7 +28,6 @@ const TransactionItem: React.FC<Props> = ({ item, onEdit, onDelete }) => {
         <Text style={styles.date}>{formattedDate}</Text>
       </View>
 
-      {/* Right Side - Action Buttons */}
       <TransactionActionsButtons
         item={item}
         onEdit={onEdit}
