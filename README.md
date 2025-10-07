@@ -38,8 +38,7 @@ It allows users to manage transactions, visualize spending, and sync data with b
 - Integrated `react-native-chart-kit` for charts.
 
 ### 3. Backend Integration
-- Simulated backend API using Axios/Fetch.
-- CRUD operations for transactions via API.
+- Simulated backend API using real Fetch.
 
 ### 4. Native Module Integration
 - **iOS (Swift):** Access local calendar and sync transactions with reminders.
@@ -48,7 +47,6 @@ It allows users to manage transactions, visualize spending, and sync data with b
 ### 5. Algorithms & Data Handling
 - Group transactions by category and calculate total spending per category.
 - Sort transactions by date in descending order.
-- Recursive function to calculate compound interest.
 
 ### 6. Performance Optimization
 - Lazy loading of transaction entries.
