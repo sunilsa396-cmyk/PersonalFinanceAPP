@@ -1,19 +1,12 @@
 # Advanced Mobile Application Development – Personal Finance App
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [Testing Instructions](#testing-instructions)
-- [Known Issues & Improvements](#known-issues--improvements)
-- [Version Control](#version-control)
-
----
-
 ## Project Overview
 This project is a cross-platform personal finance management mobile app built using **React Native**, with native module integration for iOS (Swift) and Android (Kotlin).  
 It allows users to manage transactions, visualize spending, and sync data with backend APIs.
+
+
+### Demo Video
+[Watch Demo Video](assets/demo.mp4)
 
 ---
 
