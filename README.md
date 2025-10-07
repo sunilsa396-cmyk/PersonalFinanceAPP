@@ -8,6 +8,11 @@ It allows users to manage transactions, visualize spending, and sync data with b
 ### Demo Video
 [Watch Demo Video](assets/demo.mp4)
 
+### Postman API Test
+
+![Postman Screenshot](assets/Postman.png)  
+*Postman request showing fetching transactions from the real backend API.*
+
 ### Screenshots
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
