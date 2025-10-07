@@ -20,8 +20,7 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 | Screenshot 7 | Screenshot 8 | Screenshot 9 |
 |--------------|--------------|--------------|
-| ![Screenshot 7](assets/screenshot7.jpeg) <br> *transactions by category and calculate total spending per
-category.* | ![Screenshot 8](assets/screenshot8.jpeg) <br> *sorting of transactions by date in descending order.* | ![Screenshot 9](assets/screenshot9.jpeg) <br> *1.delete income and expense entries.* |
+| ![Screenshot 7](assets/screenshot7.jpeg) <br> *View transactions grouped by category and calculate total spending per category.* | ![Screenshot 8](assets/screenshot8.jpeg) <br> *Sort transactions by date in descending order for easier tracking.* | ![Screenshot 9](assets/screenshot9.jpeg) <br> *Delete income and expense entries quickly and efficiently.* |
 
 ---
 
