@@ -29,7 +29,7 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 | Screenshot 10 |
 |---------------|
-| ![Screenshot 10](assets/architectureDiagram.jpeg) <br> *technical architecture diagram outlining:* |
+| ![Screenshot 10](assets/architectureDiagram.png <br> *technical architecture diagram outlining:* |
 
 ---
 
