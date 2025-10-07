@@ -61,39 +61,39 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 ## Project Structure
 
-/ProjectRoot  
+/ProjectRoot
 
 /android  
-# Android native code (Kotlin)  
+Android native code (Kotlin)
 
 /ios  
-# iOS native code (Swift)  
+iOS native code (Swift)
 
-/src  
+/src
 
 /components  
-# Reusable components (buttons, modals, charts)  
+Reusable components (buttons, modals, charts)
 
 /screens  
-# React Native screens  
+React Native screens
 
 /context  
-# State management using React Context / Redux  
+State management using React Context / Redux
 
 /services  
-# API integration (real Fetch)  
+API integration (real Fetch)
 
 /utils  
-# Utility functions (sorting, grouping, interest calculation)  
+Utility functions (sorting, grouping, interest calculation)
 
 App.tsx  
-# Main app entry point  
+Main app entry point
 
 package.json  
-# Project dependencies  
+Project dependencies
 
 README.md  
-# Project documentation
+Project documentation
 
 
 ---
@@ -117,8 +117,3 @@ README.md
 ## Version Control
 - Initialized Git repository.
 - Each feature committed separately.
-- Commit messages are self-explanatory, e.g.:
-  - `feat: add transaction addition and validation`
-  - `feat: integrate bar and pie charts`
-  - `feat: add iOS native calendar module`
-  - `perf: optimize FlatList rendering`
