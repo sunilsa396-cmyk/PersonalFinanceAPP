@@ -27,6 +27,10 @@ It allows users to manage transactions, visualize spending, and sync data with b
 |--------------|--------------|--------------|
 | ![Screenshot 7](assets/screenshot7.jpeg) <br> *View transactions grouped by category and calculate total spending per category.* | ![Screenshot 8](assets/screenshot8.jpeg) <br> *Sort transactions by date in descending order for easier tracking.* | ![Screenshot 9](assets/screenshot9.jpeg) <br> *Delete income and expense entries quickly and efficiently.* |
 
+| Screenshot 10 |
+|---------------|
+| ![Screenshot 10](assets/architectureDiagram.jpeg) <br> *technical architecture diagram outlining:* |
+
 ---
 
 ## Features
@@ -46,6 +50,7 @@ It allows users to manage transactions, visualize spending, and sync data with b
 - Simulated backend API using real Fetch.
 
 ### 4. Native Module Integration
+- **iOS (Swift):** Access local calendar and sync transactions with reminders.
 - **Android (Kotlin):** Access battery optimization settings and send events to React Native.
 
 ### 5. Algorithms & Data Handling
@@ -62,20 +67,6 @@ It allows users to manage transactions, visualize spending, and sync data with b
 - Clear commit messages explaining each feature added.
 
 ---
-
-## Technical Architecture
-
-```mermaid
-graph TD
-    UI["React Native UI"] --> State["State Management - Redux/Context"]
-    State --> API["API Layer - Axios/Fetch"]
-    State --> Native["Native Modules - Android/iOS"]
-    API --> Backend["Backend / Database"]
-    Native --> Device["Device Features - Battery, Calendar"]
-    Backend --> Offline["Offline Storage - SQLite/Realm"]
-    Device --> Offline
-    Offline --> UI
-
 
 ## Project Structure
 
