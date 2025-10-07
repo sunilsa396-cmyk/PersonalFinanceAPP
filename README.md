@@ -63,6 +63,20 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 ---
 
+## Technical Architecture
+
+```mermaid
+graph TD
+    UI["React Native UI"] --> State["State Management - Redux/Context"]
+    State --> API["API Layer - Axios/Fetch"]
+    State --> Native["Native Modules - Android/iOS"]
+    API --> Backend["Backend / Database"]
+    Native --> Device["Device Features - Battery, Calendar"]
+    Backend --> Offline["Offline Storage - SQLite/Realm"]
+    Device --> Offline
+    Offline --> UI
+
+
 ## Project Structure
 
 /ProjectRoot
