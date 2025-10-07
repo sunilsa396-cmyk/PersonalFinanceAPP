@@ -42,23 +42,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 8,
+    top: 20,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#ddd",
   },
   summaryTitle: {
     fontSize: 16,
-    fontWeight: "600",
+    fontFamily: "brandonmedium",
+    color: "#b40505ff",
     marginBottom: 6,
   },
   summaryItem: {
     fontSize: 14,
     marginVertical: 2,
+    fontFamily: "brandonmedium",
   },
   summaryGrand: {
     marginTop: 8,
     fontSize: 16,
-    fontWeight: "700",
+    fontFamily: "brandonmedium",
     color: "#007AFF",
   },
 });

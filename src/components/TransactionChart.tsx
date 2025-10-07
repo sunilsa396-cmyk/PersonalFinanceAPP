@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   Dimensions,
   StyleSheet,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
-import { BarChart } from "react-native-chart-kit";
+import { BarChart, PieChart } from "react-native-chart-kit";
+import * as Animatable from "react-native-animatable";
+import LinearGradient from "react-native-linear-gradient";
 
 type Transaction = {
   date: string;
@@ -22,7 +25,24 @@ const BAR_WIDTH = 30;
 const BAR_MARGIN = 20;
 const CHART_HEIGHT = 220;
 
+const PIE_COLORS = [
+  "#FFD700",
+  "#FF6347",
+  "#1E90FF",
+  "#32CD32",
+  "#FF69B4",
+  "#BA55D3",
+  "#00CED1",
+];
+
 const TransactionChart: React.FC<Props> = ({ transactions }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const grouped = new Map<string, number>();
 
   transactions.forEach((t) => {
@@ -30,16 +50,16 @@ const TransactionChart: React.FC<Props> = ({ transactions }) => {
     const [year, month, day] = t.date.split("-");
     const formatted = `${day}/${month}`;
     const amount = Number(t.transaction_amount) || 0;
-    const currentAmount = grouped.get(formatted) || 0;
-    grouped.set(formatted, currentAmount + amount);
+    grouped.set(formatted, (grouped.get(formatted) || 0) + amount);
   });
 
   const sortedDates = [...grouped.keys()].sort((a, b) => {
     const [d1, m1] = a.split("/").map(Number);
     const [d2, m2] = b.split("/").map(Number);
-    const dateA = new Date(2025, m1 - 1, d1);
-    const dateB = new Date(2025, m2 - 1, d2);
-    return dateA.getTime() - dateB.getTime();
+    return (
+      new Date(2025, m1 - 1, d1).getTime() -
+      new Date(2025, m2 - 1, d2).getTime()
+    );
   });
 
   const labels = sortedDates;
@@ -47,9 +67,13 @@ const TransactionChart: React.FC<Props> = ({ transactions }) => {
 
   if (labels.length === 0) {
     return (
-      <View style={styles.noDataContainer}>
+      <Animatable.View
+        animation="fadeIn"
+        duration={1000}
+        style={styles.noDataContainer}
+      >
         <Text style={styles.noDataText}>No data available for chart</Text>
-      </View>
+      </Animatable.View>
     );
   }
 
@@ -63,77 +87,109 @@ const TransactionChart: React.FC<Props> = ({ transactions }) => {
     backgroundGradientFrom: "transparent",
     backgroundGradientTo: "transparent",
     decimalPlaces: 0,
-    color: () => "rgba(255,255,255,0.9)", // Bars color: off-white / dark white
-    labelColor: () => "#FFFFFF", // Labels white
+    color: () => "rgba(255,255,255,0.9)",
+    labelColor: () => "#FFFFFF",
     propsForLabels: {
-      fontSize: 8,
-      fontWeight: "600",
+      fontSize: 10,
+      fontFamily: "brandonmedium",
+
     },
     propsForBackgroundLines: {
-      stroke: "#adadadff", // Horizontal lines in white
+      stroke: "#adadadff",
       strokeDasharray: "0",
-      strokeWidth: 0.1,
+      strokeWidth: 0.2,
     },
-    barPercentage: 0.6,
+    barPercentage: 0.7,
     propsForBars: {
-      rx: 6,
+      rx: 8,
     },
   };
 
+  const pieData = sortedDates.map((date, index) => ({
+    name: date,
+    amount: grouped.get(date) || 0,
+    color: PIE_COLORS[index % PIE_COLORS.length],
+    legendFontColor: "#0a0a0aff",
+    legendFontSize: 12,
+  }));
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Daily Spending</Text>
-        <Text style={styles.subtitle}>Last 7 days</Text>
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <View style={styles.chartWrapper}>
-          {/* Y-axis line (vertical) */}
-          <View
-            style={{
-              position: "absolute",
-              left: 40, // Adjust to align with chart Y-axis
-              top: 0,
-              height: CHART_HEIGHT,
-              width: 0.5,
-              backgroundColor: "#7e7e7eff",
-              zIndex: 1,
-            }}
-          />
-          {/* Bar Chart */}
-          <BarChart
-            data={{
-              labels: labels,
-              datasets: [{ data: data }],
-            }}
-            width={chartWidth}
-            height={CHART_HEIGHT}
-            yAxisLabel="₹"
-            yAxisSuffix=""
-            chartConfig={chartConfig}
-            fromZero
-            showValuesOnTopOfBars={true}
-            style={styles.chart}
-          />
-          {/* X-axis line (bottom) */}
-          <View
-            style={{
-              position: "absolute",
-              bottom: 10, // leave space for labels
-              left: 10,
-              width: chartWidth,
-              height: 0.5,
-              backgroundColor: "#777777ff",
-              zIndex: 1,
-            }}
-          />
-        </View>
-      </ScrollView>
-    </View>
+    <>
+      {loading ? (
+        <LinearGradient
+          colors={["#009688", "#00BFA5", "#009688"]}
+          style={styles.loader}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+          <ActivityIndicator size="large" color="#fff" />
+          <Text style={styles.loadingText}>Loading Charts...</Text>
+        </LinearGradient>
+      ) : (
+        <>
+          {/* ===== HEADER ===== */}
+          <Animatable.View
+            animation="fadeInDown"
+            duration={1000}
+            style={styles.header}
+          >
+            <Text style={styles.title}>Visualize data through Bar charts</Text>
+            <Text style={styles.subtitle}>Last 7 Days Overview</Text>
+          </Animatable.View>
+
+          {/* ===== BAR CHART ===== */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.scrollContent}
+          >
+            <Animatable.View
+              animation="fadeInUp"
+              duration={1200}
+              delay={200}
+              style={styles.chartWrapper}
+            >
+              <BarChart
+                data={{
+                  labels: labels,
+                  datasets: [{ data: data }],
+                }}
+                width={chartWidth}
+                height={CHART_HEIGHT}
+                yAxisLabel="₹"
+                yAxisSuffix=""
+                chartConfig={chartConfig}
+                fromZero
+                showValuesOnTopOfBars={true}
+                style={styles.chart}
+              />
+            </Animatable.View>
+          </ScrollView>
+
+          {/* ===== PIE CHART ===== */}
+          <Animatable.View
+            animation="zoomIn"
+            duration={1000}
+            delay={600}
+            style={styles.pieSection}
+          >
+            <Text style={styles.title}>Visualize data through Pie charts</Text>
+                        <Text style={styles.piesubtitle}>Last 7 Days Overview</Text>
+
+            <PieChart
+              data={pieData}
+              width={screenWidth - 20}
+              height={220}
+              accessor="amount"
+              backgroundColor="transparent"
+              paddingLeft="10"
+              chartConfig={chartConfig}
+              absolute
+            />
+          </Animatable.View>
+        </>
+      )}
+    </>
   );
 };
 
@@ -149,26 +205,46 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   title: {
     fontSize: 18,
-    fontWeight: "700",
+    top:5,
     color: "#000000ff",
+    fontFamily: "brandonmedium",
+
   },
   subtitle: {
-    fontSize: 14,
-    fontWeight: "400",
-    color: "rgba(255,255,255,0.8)",
+    fontSize: 8,
+    top:20,
+    right:10,
+    color: "rgba(0, 0, 0, 0.8)",
+    fontFamily: "brandonmedium",
+
+  },
+  piesubtitle: {
+    fontSize: 8,
+    textAlign: "right",
+    right: 10,
+    color: "rgba(0, 0, 0, 0.8)",
+    fontFamily: "brandonmedium",
+
   },
   scrollContent: {
-    paddingRight: 4,
+    paddingRight: 8,
   },
   chartWrapper: {
     borderRadius: 12,
-    overflow: "hidden",
+    marginVertical: 6,
   },
-  chart: {},
+  chart: {
+    borderRadius: 8,
+    
+  },
+  pieSection: {
+    marginTop: 10,
+  },
+  
   noDataContainer: {
     backgroundColor: "#009688",
     borderRadius: 16,
@@ -179,7 +255,20 @@ const styles = StyleSheet.create({
   },
   noDataText: {
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#000000ff",
     fontWeight: "500",
+  },
+  loader: {
+    borderRadius: 20,
+    padding: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loadingText: {
+    color: "#000000ff",
+    marginTop: 10,
+    fontSize: 14,
+    fontFamily: "brandonmedium",
+
   },
 });

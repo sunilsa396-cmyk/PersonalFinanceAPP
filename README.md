@@ -1,110 +1,99 @@
-# 💰 Personal Finance App
+# Advanced Mobile Application Development – Personal Finance App
 
-A cross-platform **React Native (Expo)** app for tracking transactions, analyzing expenses, and setting reminders — built as part of an advanced mobile development assignment.
-
----
-
-## 📱 Features
-
-- 📊 Track income & expenses by category  
-- 💾 Store transactions locally with React Context API  
-- 📈 View category-wise spending charts  
-- 🔔 Native Calendar Reminders (via iOS Swift Module)  
-- ⚙️ RESTful integration with mock API using Axios  
-- 🧮 Compound interest & total savings calculator  
-- 🧪 Unit and integration tested (Jest, JUnit, XCTest)  
-- ⚡ Infinite scroll & responsive UI with TypeScript  
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Dependencies](#dependencies)
+- [Testing Instructions](#testing-instructions)
+- [Known Issues & Improvements](#known-issues--improvements)
+- [Version Control](#version-control)
 
 ---
 
-## 🧩 Project Structure
+## Project Overview
+This project is a cross-platform personal finance management mobile app built using **React Native**, with native module integration for iOS (Swift) and Android (Kotlin).  
+It allows users to manage transactions, visualize spending, and sync data with backend APIs.
 
-PersonalFinanceApp/
-|
-├── App.tsx # Root app component
-├── index.ts # Entry point
-├── app.json # Expo config
+---
+
+## Features
+
+### 1. Transaction Management
+- Add new income and expense entries with validation.
+- Edit existing transactions.
+- Delete transactions.
+- Categorize transactions (e.g., Food, Transport, Entertainment).
+- Infinite scroll for transaction list using `FlatList`.
+
+### 2. Data Visualization
+- Bar chart and pie chart for expense and income analysis.
+- Integrated `react-native-chart-kit` for charts.
+
+### 3. Backend Integration
+- Simulated backend API using Axios/Fetch.
+- CRUD operations for transactions via API.
+
+### 4. Native Module Integration
+- **iOS (Swift):** Access local calendar and sync transactions with reminders.
+- **Android (Kotlin):** Access battery optimization settings and send events to React Native.
+
+### 5. Algorithms & Data Handling
+- Group transactions by category and calculate total spending per category.
+- Sort transactions by date in descending order.
+- Recursive function to calculate compound interest.
+
+### 6. Performance Optimization
+- Lazy loading of transaction entries.
+- Optimized `FlatList` rendering with `keyExtractor`.
+- Reduced unnecessary re-renders using `React.memo`.
+
+### 7. Version Control & Documentation
+- Git repository with clean, separate commits for each feature.
+- Clear commit messages explaining each feature added.
+
+---
+
+## Project Structure
+
+/ProjectRoot
 │
-├── src/
-│ ├── api/
-│ │ ├── transactionsApi.ts # Axios mock server
-│ │ └── TransactionCalendar.ts # Native module interface
-│ │
-│ ├── components/ # UI components
-│ │ ├── TransactionForm.tsx
-│ │ ├── TransactionItem.tsx
-│ │ ├── TransactionChart.tsx
-│ │ ├── CategoryTotals.tsx
-│ │ └── BatteryMonitor.tsx
-│ │
-│ ├── context/
-│ │ └── TransactionsContext.tsx # Global state management
-│ │
-│ ├── models/
-│ │ └── Transaction.ts # TypeScript model
-│ │
-│ ├── screens/
-│ │ └── TransactionsScreen.tsx # Main UI screen
-│ │
-│ └── utils/
-│ └── finance.ts # Helper algorithms
-│
-├── ios/ # Native Swift calendar module
-│ ├── CalendarModule.swift
-│ └── CalendarModuleBridge.m
-│
-├── android/ # Kotlin native modules (optional)
-│
-├── package.json
-└── tsconfig.json
+├─ /android # Android native code (Kotlin)
+├─ /ios # iOS native code (Swift)
+├─ /src
+│ ├─ /components # Reusable components (buttons, modals, charts)
+│ ├─ /screens # React Native screens
+│ ├─ /context # State management using React Context / Redux
+│ ├─ /services # API integration (real Fetch)
+│ └─ /utils # Utility functions (sorting, grouping, interest calculation)
+├─ App.tsx # Main app entry point
+├─ package.json # Project dependencies
+└─ README.md # Project documentation
 
 
 ---
 
-## ⚙️ Dependencies
-
-| Category | Package | Purpose |
-|-----------|----------|----------|
-| Core | `react`, `react-native`, `expo` | Core framework |
-| Navigation | `@react-navigation/native` | Screen navigation |
-| Charts | `react-native-chart-kit` | Expense charts |
-| API | `axios` | REST API calls |
-| State | `context` / `useReducer` | Global state |
-| Testing | `jest`, `@testing-library/react-native` | Unit testing |
-| Native Bridge | Swift (iOS), Kotlin (Android) | Native modules |
+## Dependencies
+- **React Native**
+- **react-native-chart-kit** – for charts
+- **Real API** – API requests
+- **React Context / Redux** – state management
 
 ---
 
-## 🧪 Testing Instructions
 
-### ✅ Unit Tests (React Native)
-Run tests with:
-```bash
-🧩 iOS Native Module Tests
+## Known Issues & Improvements
+- Backend API is currently simulated; real backend integration can be added.
+- More advanced charts (trend analysis, filter by date) can be included.
+- Additional error handling and offline support improvements.
 
-Open ios/PersonalFinanceApp.xcworkspace in Xcode, select the test scheme, and press Cmd + U.
+---
 
-🤖 Android Native Module Tests
-
-Run JUnit tests from Android Studio’s Run → Run Tests option.
-
-📱 Integration Tests (End-to-End)
-
-With Appium configured:
-
-npx appium
-npm run e2e
-
-
-🗂 Version Control
-
-Each feature is developed on a separate branch:
-
-git checkout -b feature/add-reminders
-git commit -m "Added transaction reminder module"
-
-
-Merge with main after review:
-
-git checkout main
-git merge feature/add-reminders
+## Version Control
+- Initialized Git repository.
+- Each feature committed separately.
+- Commit messages are self-explanatory, e.g.:
+  - `feat: add transaction addition and validation`
+  - `feat: integrate bar and pie charts`
+  - `feat: add iOS native calendar module`
+  - `perf: optimize FlatList rendering`
