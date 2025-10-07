@@ -12,7 +12,7 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
 |--------------|--------------|--------------|
-| ![Screenshot 1](assets/screenshot1.jpeg) <br> *Title 1* | ![Screenshot 2](assets/screenshot2.jpeg) <br> *Title 2* | ![Screenshot 3](assets/screenshot3.jpeg) <br> *Title 3* |
+| ![Screenshot 1](assets/screenshot1.jpeg) <br> *Access device battery optimization settings. Send events to the React Native layer based on battery state.* | ![Screenshot 2](assets/screenshot2.jpeg) <br> *Title 2* | ![Screenshot 3](assets/screenshot3.jpeg) <br> *Title 3* |
 
 | Screenshot 4 | Screenshot 5 | Screenshot 6 |
 |--------------|--------------|--------------|
