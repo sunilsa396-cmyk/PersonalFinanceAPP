@@ -46,7 +46,6 @@ It allows users to manage transactions, visualize spending, and sync data with b
 - Simulated backend API using real Fetch.
 
 ### 4. Native Module Integration
-- **iOS (Swift):** Access local calendar and sync transactions with reminders.
 - **Android (Kotlin):** Access battery optimization settings and send events to React Native.
 
 ### 5. Algorithms & Data Handling
