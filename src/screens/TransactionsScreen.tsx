@@ -36,6 +36,7 @@ export const TransactionsScreen: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Edit modal state
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null);
   const [formVisible, setFormVisible] = useState(false);
 
@@ -83,6 +84,7 @@ export const TransactionsScreen: React.FC = () => {
     }
   };
 
+  // Edit modal handler
   const handleEdit = useCallback((tx: Transaction) => {
     setEditTransaction(tx);
     setFormVisible(true);
@@ -96,6 +98,10 @@ export const TransactionsScreen: React.FC = () => {
     }
     setFormVisible(false);
     setEditTransaction(null);
+  };
+
+  const handleAddTransactionFromAction = (tx: Transaction) => {
+    addTransaction(tx); // Add transaction from TransactionActions
   };
 
   if (loading) {
@@ -122,7 +128,7 @@ export const TransactionsScreen: React.FC = () => {
         <Text style={styles.fixedTitle}>My Personal Finances</Text>
       </View>
 
-      {/* FlatList handles scrolling */}
+      {/* FlatList */}
       <FlatList
         data={visibleData}
         keyExtractor={(item) => item.id.toString()}
@@ -144,10 +150,7 @@ export const TransactionsScreen: React.FC = () => {
             <TransactionActions
               selectedCategory={selectedCategory}
               categories={categories}
-              onAddTransaction={() => {
-                setEditTransaction(null);
-                setFormVisible(true);
-              }}
+              onAddTransaction={handleAddTransactionFromAction}
               onSelectCategory={setSelectedCategory}
             />
             <CategoryTotals
@@ -162,7 +165,7 @@ export const TransactionsScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       />
 
-      {/* Transaction Add/Edit Modal */}
+      {/* Edit Transaction Modal */}
       <TransactionForm
         visible={formVisible}
         initial={editTransaction}
@@ -177,7 +180,7 @@ export const TransactionsScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, top:40, backgroundColor: "#f9f9f9" },
+  container: { flex: 1, top: 40, backgroundColor: "#f9f9f9" },
   center: { flex: 1, justifyContent: "center", alignItems: "center" },
   headerContainer: {
     position: "absolute",

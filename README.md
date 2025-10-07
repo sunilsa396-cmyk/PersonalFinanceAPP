@@ -8,6 +8,17 @@ It allows users to manage transactions, visualize spending, and sync data with b
 ### Demo Video
 [Watch Demo Video](assets/demo.mp4)
 
+### Screenshots
+
+| Screenshot 1 | Screenshot 2 | Screenshot 3 |
+|--------------|--------------|--------------|
+| ![Screenshot 1](assets/screenshot1.png) <br> *Title 1* | ![Screenshot 2](assets/screenshot2.png) <br> *Title 2* | ![Screenshot 3](assets/screenshot3.png) <br> *Title 3* |
+
+| Screenshot 4 | Screenshot 5 | Screenshot 6 |
+|--------------|--------------|--------------|
+| ![Screenshot 4](assets/screenshot4.png) <br> *Title 4* | ![Screenshot 5](assets/screenshot5.png) <br> *Title 5* | ![Screenshot 6](assets/screenshot6.png) <br> *Title 6* |
+
+
 ---
 
 ## Features

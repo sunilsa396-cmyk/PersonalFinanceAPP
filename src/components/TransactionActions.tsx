@@ -32,7 +32,7 @@ const TransactionActions: React.FC<Props> = ({
   );
   const [filterModalVisible, setFilterModalVisible] = useState(false);
 
-  const validCategories = categories.filter((c) => c !== "All Transaction");
+  const validCategories = categories.filter((c) => c !== "All");
 
   const handleSubmit = () => {
     if (!amount || !category) {
@@ -48,8 +48,8 @@ const TransactionActions: React.FC<Props> = ({
       transaction_category: category,
     };
 
-    onAddTransaction(newTx);
-    setFormVisible(false);
+    onAddTransaction(newTx); // only add transaction
+    setFormVisible(false);   // close modal
     setAmount("");
     setCategory("");
     setTransactionType("income");
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   input: { borderWidth: 1, borderColor: "#ccc", borderRadius: 8, padding: 10, marginBottom: 10 },
   pickerContainer: { borderWidth: 1, borderColor: "#ccc", borderRadius: 8, overflow: "hidden", marginBottom: 12 },
   picker: { height: 60 },
-  label: { fontSize: 16, marginBottom: 6, color: "#333",fontFamily: "brandonmedium" },
+  label: { fontSize: 16, marginBottom: 6, color: "#333", fontFamily: "brandonmedium" },
   typeRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 16 },
   typeButton: {
     flex: 1,
