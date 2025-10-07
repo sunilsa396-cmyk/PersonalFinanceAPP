@@ -61,18 +61,39 @@ It allows users to manage transactions, visualize spending, and sync data with b
 
 ## Project Structure
 
-/ProjectRoot
-/android # Android native code (Kotlin)
-/ios # iOS native code (Swift)
-/src
-/components # Reusable components (buttons, modals, charts)
-/screens # React Native screens
-/context # State management using React Context / Redux
-/services # API integration (real Fetch)
-/utils # Utility functions (sorting, grouping, interest calculation)
-App.tsx # Main app entry point
-package.json # Project dependencies
-README.md # Project documentation
+/ProjectRoot  
+
+/android  
+# Android native code (Kotlin)  
+
+/ios  
+# iOS native code (Swift)  
+
+/src  
+
+/components  
+# Reusable components (buttons, modals, charts)  
+
+/screens  
+# React Native screens  
+
+/context  
+# State management using React Context / Redux  
+
+/services  
+# API integration (real Fetch)  
+
+/utils  
+# Utility functions (sorting, grouping, interest calculation)  
+
+App.tsx  
+# Main app entry point  
+
+package.json  
+# Project dependencies  
+
+README.md  
+# Project documentation
 
 
 ---
